@@ -1,0 +1,51 @@
+---
+const phone = '+1 (415) 555-0100';
+const email = 'chetan@example.com';
+---
+
+<footer id="contact" class="bg-charcoal py-24 px-6 relative overflow-hidden">
+
+  <!-- Gold top border accent -->
+  <div class="absolute top-0 left-0 right-0 h-1 bg-gold"></div>
+
+  <div class="max-w-4xl mx-auto text-center">
+
+    <p class="text-gold text-sm font-semibold uppercase tracking-[0.2em] mb-4 reveal">
+      Ready to Start?
+    </p>
+    <h2 class="font-display text-[clamp(3rem,8vw,6rem)] leading-none text-white uppercase mb-6 reveal">
+      Let's Find Your<br/>Dream Home
+    </h2>
+    <p class="text-white/50 text-lg mb-12 max-w-xl mx-auto reveal">
+      Whether you're buying, selling, or just exploring — I'm here to help.
+      No pressure, no obligation.
+    </p>
+
+    <!-- Primary CTA -->
+    <div class="reveal mb-16">
+      <a
+        href={`mailto:${email}`}
+        class="inline-block bg-gold hover:bg-gold-hover text-charcoal font-bold uppercase tracking-widest px-10 py-5 text-sm transition-colors"
+      >
+        Email Me Today
+      </a>
+    </div>
+
+    <!-- Contact details -->
+    <div class="flex flex-col sm:flex-row gap-8 justify-center text-white/40 text-sm reveal">
+      <a href={`tel:${phone}`} class="hover:text-gold transition-colors">
+        {phone}
+      </a>
+      <span class="hidden sm:block text-white/20">|</span>
+      <a href={`mailto:${email}`} class="hover:text-gold transition-colors">
+        {email}
+      </a>
+    </div>
+
+    <!-- Footer bottom -->
+    <div class="mt-16 pt-8 border-t border-white/10 text-white/20 text-xs">
+      &copy; {new Date().getFullYear()} Chetan Kotak. All rights reserved.
+    </div>
+
+  </div>
+</footer>

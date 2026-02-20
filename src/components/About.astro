@@ -1,0 +1,57 @@
+---
+const stats = [
+  { number: '500+', label: 'Homes Sold' },
+  { number: '$2B+', label: 'In Volume' },
+  { number: '98%', label: 'Client Satisfaction' },
+];
+---
+
+<section id="about" class="bg-offwhite py-24 px-6">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+
+    <!-- Photo column -->
+    <div class="reveal">
+      <div class="aspect-[3/4] bg-lightgray relative overflow-hidden">
+        <!-- Replace with actual headshot -->
+        <div class="w-full h-full bg-gradient-to-br from-charcoal-90 to-charcoal flex items-center justify-center">
+          <span class="font-display text-6xl text-gold/30">CK</span>
+        </div>
+        <!-- Gold accent border -->
+        <div class="absolute inset-0 border-4 border-gold translate-x-4 translate-y-4 -z-10"></div>
+      </div>
+    </div>
+
+    <!-- Content column -->
+    <div>
+      <p class="text-gold text-sm font-semibold uppercase tracking-[0.2em] mb-4 reveal">
+        About Me
+      </p>
+      <h2 class="font-display text-[clamp(3rem,6vw,5rem)] leading-none text-charcoal uppercase mb-6 reveal">
+        15 Years.<br/>Thousands of Deals.<br/>One Goal.
+      </h2>
+      <div class="space-y-4 text-charcoal/70 leading-relaxed reveal">
+        <p>
+          I'm Chetan Kotak — a real estate agent with over 15 years
+          of experience helping buyers, sellers, and investors navigate one
+          of the most competitive markets in the country.
+        </p>
+        <p>
+          My approach is simple: data-driven strategy, relentless
+          negotiation, and white-glove service from first showing to
+          closing day.
+        </p>
+      </div>
+
+      <!-- Stats row -->
+      <div class="grid grid-cols-3 gap-6 mt-10 reveal">
+        {stats.map(stat => (
+          <div>
+            <div class="font-display text-4xl text-gold">{stat.number}</div>
+            <div class="text-xs text-charcoal/50 uppercase tracking-widest mt-1">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+  </div>
+</section>

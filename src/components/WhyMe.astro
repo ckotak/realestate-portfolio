@@ -1,0 +1,58 @@
+---
+const reasons = [
+  {
+    icon: '◆',
+    title: 'Market Mastery',
+    body: 'Deep neighborhood expertise — pricing, timing, and trends that give you a decisive edge.',
+  },
+  {
+    icon: '◆',
+    title: 'Fierce Negotiator',
+    body: "I've closed deals in multi-offer wars, complex estates, and off-market situations. Your interests come first.",
+  },
+  {
+    icon: '◆',
+    title: 'Full-Service Support',
+    body: 'From staging and photography to lenders and contractors — my network becomes your network.',
+  },
+  {
+    icon: '◆',
+    title: 'Transparent Process',
+    body: "No jargon, no surprises. You'll always know exactly where you stand and what comes next.",
+  },
+];
+---
+
+<section id="why-me" class="bg-white py-24 px-6">
+  <div class="max-w-6xl mx-auto">
+
+    <div class="text-center mb-16">
+      <p class="text-gold text-sm font-semibold uppercase tracking-[0.2em] mb-4 reveal">
+        Why Work With Me
+      </p>
+      <h2 class="font-display text-[clamp(3rem,6vw,5rem)] leading-none text-charcoal uppercase reveal">
+        The Difference Is In<br/>The Details
+      </h2>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      {reasons.map((reason, i) => (
+        <div
+          class="reveal border border-lightgray p-8 hover:border-gold transition-colors group"
+          style={`transition-delay: ${i * 100}ms`}
+        >
+          <div class="text-gold text-2xl mb-4 group-hover:scale-110 transition-transform">
+            {reason.icon}
+          </div>
+          <h3 class="font-display text-2xl text-charcoal uppercase mb-3">
+            {reason.title}
+          </h3>
+          <p class="text-charcoal/60 text-sm leading-relaxed">
+            {reason.body}
+          </p>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
