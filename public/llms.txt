@@ -1,0 +1,33 @@
+# Chetan Kotak — Licensed Real Estate Agent
+
+> Expert real estate guidance for buyers, sellers, and investors. 15+ years of experience in the Bay Area with $2B+ in closed volume and 500+ homes sold.
+
+## About
+
+Chetan Kotak is a licensed real estate agent specializing in the Bay Area, California. He provides data-driven strategy, fierce negotiation, and white-glove service from first showing to closing day.
+
+## Services
+
+- **Buyer Representation** — Helping buyers find and purchase their ideal home, including competitive multi-offer situations
+- **Seller Representation** — Strategic pricing, staging, marketing, and negotiation to maximize sale price
+- **Investment Properties** — Sourcing and evaluating investment opportunities across the Bay Area
+- **Relocation Services** — Seamless support for buyers and sellers relocating to or from the Bay Area
+
+## Why Choose Chetan Kotak
+
+- 15+ years of Bay Area real estate experience
+- 500+ homes sold, $2B+ in closed volume
+- 98% client satisfaction rate
+- Full-service support including staging, photography, lender, and contractor referrals
+- Deep neighborhood expertise across the Bay Area
+
+## Contact
+
+- **Phone:** +1 (415) 555-0100   <!-- TODO: replace with real number -->
+- **Email:** chetan@example.com   <!-- TODO: replace with real email -->
+- **Website:** https://chetankotak.github.io/realestate-portfolio
+- **License:** DRE #XXXXXXX (California)   <!-- TODO: replace with real DRE number -->
+
+## Location
+
+Serving the San Francisco Bay Area, California.

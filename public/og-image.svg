@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#0f0f0f"/>
+
+  <!-- Gold accent bar top -->
+  <rect width="1200" height="6" fill="#C9A84C"/>
+
+  <!-- Gold accent bar bottom -->
+  <rect y="624" width="1200" height="6" fill="#C9A84C"/>
+
+  <!-- Left gold vertical bar -->
+  <rect x="80" y="80" width="4" height="470" fill="#C9A84C"/>
+
+  <!-- Name -->
+  <text x="120" y="200" font-family="Arial Narrow, Arial, sans-serif" font-weight="700" font-size="96" fill="white" letter-spacing="4">CHETAN KOTAK</text>
+
+  <!-- Gold divider line -->
+  <rect x="120" y="230" width="480" height="3" fill="#C9A84C"/>
+
+  <!-- Title -->
+  <text x="120" y="300" font-family="Arial, sans-serif" font-weight="400" font-size="32" fill="#C9A84C" letter-spacing="6">REAL ESTATE AGENT</text>
+
+  <!-- Tagline -->
+  <text x="120" y="380" font-family="Arial, sans-serif" font-size="24" fill="rgba(255,255,255,0.6)">Expert guidance. Unmatched results.</text>
+
+  <!-- Stats -->
+  <text x="120" y="480" font-family="Arial Narrow, Arial, sans-serif" font-weight="700" font-size="52" fill="#C9A84C">500+</text>
+  <text x="120" y="520" font-family="Arial, sans-serif" font-size="18" fill="rgba(255,255,255,0.4)" letter-spacing="3">HOMES SOLD</text>
+
+  <text x="420" y="480" font-family="Arial Narrow, Arial, sans-serif" font-weight="700" font-size="52" fill="#C9A84C">$2B+</text>
+  <text x="420" y="520" font-family="Arial, sans-serif" font-size="18" fill="rgba(255,255,255,0.4)" letter-spacing="3">IN VOLUME</text>
+
+  <text x="720" y="480" font-family="Arial Narrow, Arial, sans-serif" font-weight="700" font-size="52" fill="#C9A84C">15+</text>
+  <text x="720" y="520" font-family="Arial, sans-serif" font-size="18" fill="rgba(255,255,255,0.4)" letter-spacing="3">YEARS EXP.</text>
+</svg>
