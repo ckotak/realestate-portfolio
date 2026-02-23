@@ -18,6 +18,13 @@ const listings = (await getCollection('listings')).sort(
       <h2 class="font-display text-[clamp(3rem,6vw,5rem)] leading-none text-white uppercase reveal">
         Properties<br/>On The Market
       </h2>
+      <div class="flex flex-wrap justify-center gap-3 mt-8 reveal" id="filter-pills">
+        <button data-filter="All" data-active class="cursor-pointer rounded-full px-5 py-2 text-xs font-bold uppercase tracking-widest transition-colors bg-gold text-charcoal">All</button>
+        <button data-filter="Active" class="cursor-pointer rounded-full px-5 py-2 text-xs font-bold uppercase tracking-widest transition-colors border border-white/20 text-white/60 hover:text-white"><span class="pill-plus">+ </span>Active</button>
+        <button data-filter="Under Contract" class="cursor-pointer rounded-full px-5 py-2 text-xs font-bold uppercase tracking-widest transition-colors border border-white/20 text-white/60 hover:text-white"><span class="pill-plus">+ </span>Under Contract</button>
+        <button data-filter="Sold" class="cursor-pointer rounded-full px-5 py-2 text-xs font-bold uppercase tracking-widest transition-colors border border-white/20 text-white/60 hover:text-white"><span class="pill-plus">+ </span>Sold</button>
+      </div>
+      <p id="filter-hint" class="text-white/30 text-xs mt-3 uppercase tracking-widest transition-opacity duration-300">Select one or more to filter</p>
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -40,6 +47,7 @@ const listings = (await getCollection('listings')).sort(
 
         return (
           <div
+            data-status={status}
             class="reveal border border-white/10 hover:border-gold transition-colors group overflow-hidden"
             style={`transition-delay: ${i * 100}ms`}
           >
@@ -85,3 +93,61 @@ const listings = (await getCollection('listings')).sort(
 
   </div>
 </section>
+
+<style>
+  #filter-pills .pill-plus { display: none; }
+  #filter-pills button:not([data-active]):hover .pill-plus { display: inline; }
+</style>
+
+<script>
+  const allPill = document.querySelector('#filter-pills button[data-filter="All"]');
+  const statusPills = document.querySelectorAll('#filter-pills button:not([data-filter="All"])');
+  const cards = document.querySelectorAll('#listings .grid > [data-status]');
+  const hint = document.getElementById('filter-hint');
+
+  const activeClasses = ['bg-gold', 'text-charcoal'];
+  const inactiveClasses = ['border', 'border-white/20', 'text-white/60', 'hover:text-white'];
+
+  function setActive(pill, active) {
+    if (active) {
+      pill.setAttribute('data-active', '');
+      pill.classList.add(...activeClasses);
+      pill.classList.remove(...inactiveClasses);
+    } else {
+      pill.removeAttribute('data-active');
+      pill.classList.remove(...activeClasses);
+      pill.classList.add(...inactiveClasses);
+    }
+  }
+
+  function applyFilter() {
+    const selected = [...statusPills]
+      .filter(p => p.hasAttribute('data-active'))
+      .map(p => p.getAttribute('data-filter'));
+
+    cards.forEach(card => {
+      card.style.display = (selected.length === 0 || selected.includes(card.getAttribute('data-status'))) ? '' : 'none';
+    });
+
+    hint.style.opacity = selected.length === 0 ? '1' : '0';
+  }
+
+  allPill.addEventListener('click', () => {
+    statusPills.forEach(p => setActive(p, false));
+    setActive(allPill, true);
+    applyFilter();
+  });
+
+  statusPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      setActive(allPill, false);
+      setActive(pill, !pill.hasAttribute('data-active'));
+
+      // If nothing is selected, revert to All
+      const anySelected = [...statusPills].some(p => p.hasAttribute('data-active'));
+      if (!anySelected) setActive(allPill, true);
+
+      applyFilter();
+    });
+  });
+</script>
