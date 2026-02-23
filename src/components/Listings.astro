@@ -1,0 +1,79 @@
+---
+import { getCollection } from 'astro:content';
+
+const statusOrder = { 'Active': 0, 'Under Contract': 1, 'Sold': 2 };
+
+const listings = (await getCollection('listings')).sort(
+  (a, b) => statusOrder[a.data.status] - statusOrder[b.data.status]
+);
+---
+
+<section id="listings" class="bg-charcoal py-24 px-6">
+  <div class="max-w-6xl mx-auto">
+
+    <div class="text-center mb-16">
+      <p class="text-gold text-sm font-semibold uppercase tracking-[0.2em] mb-4 reveal">
+        Current Listings
+      </p>
+      <h2 class="font-display text-[clamp(3rem,6vw,5rem)] leading-none text-white uppercase reveal">
+        Properties<br/>On The Market
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      {listings.map((listing, i) => {
+        const { address, price, beds, baths, sqft, status, photo, description } = listing.data;
+
+        const badgeClass =
+          status === 'Active'
+            ? 'bg-gold text-charcoal'
+            : status === 'Under Contract'
+            ? 'bg-white/10 text-white'
+            : 'bg-white/20 text-white/60';
+
+        return (
+          <div
+            class="reveal border border-white/10 hover:border-gold transition-colors group overflow-hidden"
+            style={`transition-delay: ${i * 100}ms`}
+          >
+            <!-- Photo -->
+            <div class="relative aspect-video overflow-hidden">
+              {photo ? (
+                <img
+                  src={import.meta.env.BASE_URL.replace(/\/$/, '') + photo}
+                  alt={address}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              ) : (
+                <div class="w-full h-full bg-gradient-to-br from-gold/20 to-charcoal flex items-center justify-center">
+                  <span class="text-gold text-4xl opacity-30">◆</span>
+                </div>
+              )}
+              <!-- Status badge -->
+              <span class={`absolute top-3 left-3 text-xs font-semibold uppercase tracking-widest px-3 py-1 ${badgeClass}`}>
+                {status}
+              </span>
+            </div>
+
+            <!-- Card body -->
+            <div class="p-6">
+              <p class="text-white/40 text-xs uppercase tracking-[0.15em] mb-2">
+                {address}
+              </p>
+              <p class="font-display text-3xl text-gold leading-none mb-4">
+                {price}
+              </p>
+              <p class="text-white/50 text-sm mb-4">
+                {beds} bd &middot; {baths} ba &middot; {sqft.toLocaleString()} sq ft
+              </p>
+              <p class="text-white/70 text-sm leading-relaxed">
+                {description}
+              </p>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+
+  </div>
+</section>

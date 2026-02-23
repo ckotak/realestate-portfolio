@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="sky1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f1923"/>
+      <stop offset="100%" stop-color="#1c2d3f"/>
+    </linearGradient>
+    <linearGradient id="gold1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#b89450"/>
+      <stop offset="100%" stop-color="#d4aa60"/>
+    </linearGradient>
+    <linearGradient id="bldg1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1e3248"/>
+      <stop offset="100%" stop-color="#162636"/>
+    </linearGradient>
+    <filter id="glow1">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="800" height="450" fill="url(#sky1)"/>
+
+  <!-- Stars -->
+  <circle cx="60" cy="40" r="1" fill="white" opacity="0.6"/>
+  <circle cx="140" cy="25" r="1.5" fill="white" opacity="0.5"/>
+  <circle cx="220" cy="55" r="1" fill="white" opacity="0.7"/>
+  <circle cx="350" cy="30" r="1" fill="white" opacity="0.4"/>
+  <circle cx="480" cy="20" r="1.5" fill="white" opacity="0.6"/>
+  <circle cx="580" cy="45" r="1" fill="white" opacity="0.5"/>
+  <circle cx="670" cy="35" r="1" fill="white" opacity="0.7"/>
+  <circle cx="750" cy="60" r="1" fill="white" opacity="0.4"/>
+  <circle cx="700" cy="15" r="1" fill="white" opacity="0.6"/>
+  <circle cx="30" cy="80" r="1" fill="white" opacity="0.3"/>
+  <circle cx="400" cy="65" r="1" fill="white" opacity="0.5"/>
+
+  <!-- City skyline silhouette (background) -->
+  <rect x="0" y="200" width="80" height="180" fill="#0d1e2d" opacity="0.7"/>
+  <rect x="10" y="170" width="30" height="30" fill="#0d1e2d" opacity="0.7"/>
+  <rect x="20" y="155" width="10" height="15" fill="#0d1e2d" opacity="0.7"/>
+  <rect x="90" y="160" width="60" height="220" fill="#0d1e2d" opacity="0.7"/>
+  <rect x="100" y="145" width="20" height="15" fill="#0d1e2d" opacity="0.7"/>
+  <rect x="620" y="140" width="70" height="240" fill="#0d1e2d" opacity="0.7"/>
+  <rect x="640" y="125" width="15" height="15" fill="#0d1e2d" opacity="0.7"/>
+  <rect x="700" y="165" width="55" height="215" fill="#0d1e2d" opacity="0.7"/>
+  <rect x="760" y="185" width="40" height="195" fill="#0d1e2d" opacity="0.7"/>
+
+  <!-- Lit windows in skyline -->
+  <rect x="15" y="178" width="8" height="5" fill="#c9a84c" opacity="0.5"/>
+  <rect x="28" y="178" width="8" height="5" fill="#c9a84c" opacity="0.3"/>
+  <rect x="95" y="168" width="8" height="5" fill="#c9a84c" opacity="0.4"/>
+  <rect x="115" y="168" width="8" height="5" fill="#c9a84c" opacity="0.6"/>
+  <rect x="95" y="185" width="8" height="5" fill="#c9a84c" opacity="0.3"/>
+  <rect x="630" y="148" width="10" height="6" fill="#c9a84c" opacity="0.5"/>
+  <rect x="655" y="148" width="10" height="6" fill="#c9a84c" opacity="0.3"/>
+  <rect x="630" y="165" width="10" height="6" fill="#c9a84c" opacity="0.6"/>
+  <rect x="710" y="175" width="10" height="6" fill="#c9a84c" opacity="0.4"/>
+
+  <!-- Ground -->
+  <rect x="0" y="360" width="800" height="90" fill="#0a1520"/>
+
+  <!-- Sidewalk -->
+  <rect x="0" y="375" width="800" height="15" fill="#131e2a"/>
+
+  <!-- Main building - modern townhome -->
+  <!-- Left unit -->
+  <rect x="160" y="180" width="140" height="195" fill="url(#bldg1)"/>
+  <!-- Right unit (slightly taller, main) -->
+  <rect x="300" y="155" width="160" height="220" fill="#1a2d42"/>
+  <!-- Third unit -->
+  <rect x="460" y="195" width="130" height="180" fill="url(#bldg1)"/>
+
+  <!-- Flat roofs with gold accent line -->
+  <rect x="160" y="176" width="140" height="4" fill="url(#gold1)"/>
+  <rect x="300" y="151" width="160" height="4" fill="url(#gold1)"/>
+  <rect x="460" y="191" width="130" height="4" fill="url(#gold1)"/>
+
+  <!-- Windows - Left unit -->
+  <rect x="175" y="200" width="45" height="35" fill="#2a4a6a" rx="1"/>
+  <line x1="197" y1="200" x2="197" y2="235" stroke="#1a3550" stroke-width="1"/>
+  <rect x="235" y="200" width="45" height="35" fill="#2a4a6a" rx="1"/>
+  <line x1="257" y1="200" x2="257" y2="235" stroke="#1a3550" stroke-width="1"/>
+  <rect x="175" y="255" width="45" height="35" fill="#2a4a6a" rx="1"/>
+  <line x1="197" y1="255" x2="197" y2="290" stroke="#1a3550" stroke-width="1"/>
+  <rect x="235" y="255" width="45" height="35" fill="#2a4a6a" rx="1"/>
+  <line x1="257" y1="255" x2="257" y2="290" stroke="#1a3550" stroke-width="1"/>
+
+  <!-- Window glow - Left unit (some lit) -->
+  <rect x="175" y="200" width="45" height="35" fill="#c9a84c" opacity="0.15" rx="1"/>
+  <rect x="175" y="255" width="45" height="35" fill="#c9a84c" opacity="0.25" rx="1"/>
+
+  <!-- Windows - Center unit (main) -->
+  <rect x="315" y="170" width="55" height="45" fill="#2a4a6a" rx="1"/>
+  <line x1="342" y1="170" x2="342" y2="215" stroke="#1a3550" stroke-width="1"/>
+  <line x1="315" y1="193" x2="370" y2="193" stroke="#1a3550" stroke-width="1"/>
+  <rect x="385" y="170" width="55" height="45" fill="#2a4a6a" rx="1"/>
+  <line x1="412" y1="170" x2="412" y2="215" stroke="#1a3550" stroke-width="1"/>
+  <line x1="385" y1="193" x2="440" y2="193" stroke="#1a3550" stroke-width="1"/>
+
+  <!-- Lit windows center -->
+  <rect x="315" y="170" width="55" height="45" fill="#c9a84c" opacity="0.3" rx="1"/>
+  <rect x="385" y="170" width="55" height="45" fill="#c9a84c" opacity="0.15" rx="1"/>
+
+  <rect x="315" y="235" width="55" height="40" fill="#2a4a6a" rx="1"/>
+  <rect x="385" y="235" width="55" height="40" fill="#2a4a6a" rx="1"/>
+  <rect x="315" y="235" width="55" height="40" fill="#c9a84c" opacity="0.2" rx="1"/>
+
+  <!-- Large floor-to-ceiling window center -->
+  <rect x="335" y="295" width="80" height="70" fill="#2a4a6a" rx="1"/>
+  <line x1="375" y1="295" x2="375" y2="365" stroke="#1a3550" stroke-width="1.5"/>
+  <rect x="335" y="295" width="80" height="70" fill="#c9a84c" opacity="0.12" rx="1"/>
+
+  <!-- Windows - Right unit -->
+  <rect x="475" y="215" width="45" height="35" fill="#2a4a6a" rx="1"/>
+  <rect x="530" y="215" width="45" height="35" fill="#2a4a6a" rx="1"/>
+  <rect x="530" y="215" width="45" height="35" fill="#c9a84c" opacity="0.2" rx="1"/>
+  <rect x="475" y="268" width="45" height="35" fill="#2a4a6a" rx="1"/>
+  <rect x="530" y="268" width="45" height="35" fill="#2a4a6a" rx="1"/>
+
+  <!-- Doors -->
+  <rect x="200" y="330" width="30" height="45" fill="#0f1e2d" rx="1"/>
+  <rect x="360" y="320" width="35" height="55" fill="#0f1e2d" rx="1"/>
+  <circle cx="393" cy="348" r="2" fill="#c9a84c"/>
+  <rect x="505" y="340" width="28" height="35" fill="#0f1e2d" rx="1"/>
+
+  <!-- Balcony - center unit -->
+  <rect x="308" y="283" width="134" height="6" fill="#243c52"/>
+  <rect x="308" y="283" width="134" height="2" fill="#c9a84c" opacity="0.5"/>
+  <line x1="315" y1="283" x2="315" y2="295" stroke="#243c52" stroke-width="3"/>
+  <line x1="338" y1="283" x2="338" y2="295" stroke="#243c52" stroke-width="2"/>
+  <line x1="360" y1="283" x2="360" y2="295" stroke="#243c52" stroke-width="2"/>
+  <line x1="382" y1="283" x2="382" y2="295" stroke="#243c52" stroke-width="2"/>
+  <line x1="404" y1="283" x2="404" y2="295" stroke="#243c52" stroke-width="2"/>
+  <line x1="426" y1="283" x2="426" y2="295" stroke="#243c52" stroke-width="2"/>
+  <line x1="435" y1="283" x2="435" y2="295" stroke="#243c52" stroke-width="3"/>
+
+  <!-- Street lamp -->
+  <rect x="130" y="250" width="4" height="125" fill="#1a2d3f"/>
+  <rect x="120" y="250" width="24" height="5" fill="#243c52" rx="1"/>
+  <ellipse cx="132" cy="248" rx="12" ry="5" fill="#c9a84c" opacity="0.8" filter="url(#glow1)"/>
+  <ellipse cx="132" cy="248" rx="8" ry="3" fill="#e8c86a"/>
+
+  <rect x="655" y="255" width="4" height="120" fill="#1a2d3f"/>
+  <rect x="645" y="255" width="24" height="5" fill="#243c52" rx="1"/>
+  <ellipse cx="657" cy="253" rx="12" ry="5" fill="#c9a84c" opacity="0.8" filter="url(#glow1)"/>
+  <ellipse cx="657" cy="253" rx="8" ry="3" fill="#e8c86a"/>
+
+  <!-- Moon -->
+  <circle cx="720" cy="60" r="22" fill="#1c2d3f"/>
+  <circle cx="710" cy="52" r="22" fill="#e8d9a0" opacity="0.15"/>
+  <circle cx="712" cy="54" r="18" fill="#d4c88a" opacity="0.1"/>
+
+  <!-- Label bar -->
+  <rect x="0" y="390" width="800" height="60" fill="#0a1520" opacity="0.85"/>
+  <text x="400" y="416" font-family="Georgia, serif" font-size="13" fill="#c9a84c" text-anchor="middle" letter-spacing="3" font-weight="normal">123 MAIN STREET · SOMA · SAN FRANCISCO</text>
+  <text x="400" y="438" font-family="Georgia, serif" font-size="11" fill="white" text-anchor="middle" opacity="0.5" letter-spacing="1">MODERN TOWNHOME · PANORAMIC CITY VIEWS</text>
+</svg>

@@ -1,0 +1,184 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="sky2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6b9dc2"/>
+      <stop offset="40%" stop-color="#a8c8e0"/>
+      <stop offset="100%" stop-color="#d4e8f0"/>
+    </linearGradient>
+    <linearGradient id="grass2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4a7a3a"/>
+      <stop offset="100%" stop-color="#3a6030"/>
+    </linearGradient>
+    <linearGradient id="roof2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5c3d2a"/>
+      <stop offset="100%" stop-color="#3d2518"/>
+    </linearGradient>
+    <linearGradient id="house2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c4a882"/>
+      <stop offset="100%" stop-color="#b09060"/>
+    </linearGradient>
+    <linearGradient id="gold2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#b89450"/>
+      <stop offset="100%" stop-color="#d4aa60"/>
+    </linearGradient>
+    <filter id="shadow2" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="4" dy="6" stdDeviation="4" flood-color="#000000" flood-opacity="0.25"/>
+    </filter>
+    <filter id="treeshadow">
+      <feDropShadow dx="3" dy="4" stdDeviation="3" flood-color="#000000" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="800" height="450" fill="url(#sky2)"/>
+
+  <!-- Clouds -->
+  <ellipse cx="120" cy="70" rx="55" ry="22" fill="white" opacity="0.7"/>
+  <ellipse cx="155" cy="58" rx="40" ry="18" fill="white" opacity="0.8"/>
+  <ellipse cx="85" cy="65" rx="35" ry="16" fill="white" opacity="0.6"/>
+
+  <ellipse cx="550" cy="50" rx="65" ry="20" fill="white" opacity="0.6"/>
+  <ellipse cx="590" cy="38" rx="45" ry="18" fill="white" opacity="0.7"/>
+  <ellipse cx="510" cy="48" rx="38" ry="15" fill="white" opacity="0.5"/>
+
+  <!-- Ground / lawn -->
+  <rect x="0" y="340" width="800" height="110" fill="url(#grass2)"/>
+  <!-- Sidewalk -->
+  <rect x="0" y="370" width="800" height="14" fill="#c8bda8"/>
+  <!-- Street -->
+  <rect x="0" y="384" width="800" height="66" fill="#8a8070"/>
+  <!-- Road markings -->
+  <rect x="180" y="407" width="60" height="5" fill="#e0d8c8" opacity="0.6" rx="2"/>
+  <rect x="360" y="407" width="60" height="5" fill="#e0d8c8" opacity="0.6" rx="2"/>
+  <rect x="540" y="407" width="60" height="5" fill="#e0d8c8" opacity="0.6" rx="2"/>
+
+  <!-- Background trees (large oaks) -->
+  <!-- Far left oak -->
+  <rect x="55" y="230" width="12" height="130" fill="#6b4c2a"/>
+  <ellipse cx="61" cy="210" rx="50" ry="55" fill="#2d5a1e" opacity="0.7"/>
+  <ellipse cx="45" cy="225" rx="35" ry="40" fill="#3a6e28" opacity="0.6"/>
+  <ellipse cx="78" cy="220" rx="32" ry="38" fill="#2d5a1e" opacity="0.65"/>
+
+  <!-- Far right oak -->
+  <rect x="690" y="220" width="12" height="140" fill="#6b4c2a"/>
+  <ellipse cx="696" cy="198" rx="55" ry="58" fill="#2d5a1e" opacity="0.7"/>
+  <ellipse cx="675" cy="215" rx="38" ry="42" fill="#3a6e28" opacity="0.6"/>
+  <ellipse cx="715" cy="210" rx="35" ry="40" fill="#2d5a1e" opacity="0.65"/>
+
+  <!-- Main house body -->
+  <rect x="200" y="220" width="400" height="155" fill="url(#house2)" filter="url(#shadow2)"/>
+
+  <!-- Craftsman siding detail - horizontal lines -->
+  <line x1="200" y1="235" x2="600" y2="235" stroke="#a8906a" stroke-width="1" opacity="0.5"/>
+  <line x1="200" y1="250" x2="600" y2="250" stroke="#a8906a" stroke-width="1" opacity="0.5"/>
+  <line x1="200" y1="265" x2="600" y2="265" stroke="#a8906a" stroke-width="1" opacity="0.5"/>
+  <line x1="200" y1="280" x2="600" y2="280" stroke="#a8906a" stroke-width="1" opacity="0.5"/>
+  <line x1="200" y1="295" x2="600" y2="295" stroke="#a8906a" stroke-width="1" opacity="0.5"/>
+  <line x1="200" y1="310" x2="600" y2="310" stroke="#a8906a" stroke-width="1" opacity="0.5"/>
+  <line x1="200" y1="325" x2="600" y2="325" stroke="#a8906a" stroke-width="1" opacity="0.5"/>
+
+  <!-- Main roof (gable) -->
+  <polygon points="175,225 400,100 625,225" fill="url(#roof2)" filter="url(#shadow2)"/>
+  <!-- Roof trim -->
+  <polygon points="175,225 400,100 625,225 620,225 400,107 180,225" fill="#7a5038" opacity="0.5"/>
+
+  <!-- Chimney -->
+  <rect x="480" y="110" width="30" height="70" fill="#7a5038"/>
+  <rect x="476" y="108" width="38" height="8" fill="#5c3d2a"/>
+
+  <!-- Front porch -->
+  <rect x="230" y="310" width="340" height="65" fill="#c8aa80"/>
+  <!-- Porch floor boards -->
+  <line x1="230" y1="320" x2="570" y2="320" stroke="#b89060" stroke-width="1" opacity="0.4"/>
+  <line x1="230" y1="330" x2="570" y2="330" stroke="#b89060" stroke-width="1" opacity="0.4"/>
+  <line x1="230" y1="340" x2="570" y2="340" stroke="#b89060" stroke-width="1" opacity="0.4"/>
+  <line x1="230" y1="350" x2="570" y2="350" stroke="#b89060" stroke-width="1" opacity="0.4"/>
+  <!-- Porch rail -->
+  <rect x="230" y="308" width="340" height="6" fill="#8b5e3c"/>
+  <!-- Porch columns -->
+  <rect x="245" y="220" width="16" height="90" fill="#d4b888" rx="2"/>
+  <rect x="390" y="220" width="16" height="90" fill="#d4b888" rx="2"/>
+  <rect x="540" y="220" width="16" height="90" fill="#d4b888" rx="2"/>
+  <!-- Column caps -->
+  <rect x="241" y="218" width="24" height="6" fill="#c9a84c" opacity="0.7" rx="1"/>
+  <rect x="386" y="218" width="24" height="6" fill="#c9a84c" opacity="0.7" rx="1"/>
+  <rect x="536" y="218" width="24" height="6" fill="#c9a84c" opacity="0.7" rx="1"/>
+
+  <!-- Porch roof -->
+  <rect x="225" y="215" width="350" height="8" fill="#5c3d2a"/>
+  <rect x="225" y="213" width="350" height="4" fill="url(#gold2)" opacity="0.6"/>
+
+  <!-- Front door -->
+  <rect x="365" y="290" width="70" height="85" fill="#4a2e18" rx="2"/>
+  <!-- Door panels -->
+  <rect x="373" y="298" width="24" height="28" fill="#5c3d2a" rx="1"/>
+  <rect x="403" y="298" width="24" height="28" fill="#5c3d2a" rx="1"/>
+  <rect x="373" y="332" width="24" height="35" fill="#5c3d2a" rx="1"/>
+  <rect x="403" y="332" width="24" height="35" fill="#5c3d2a" rx="1"/>
+  <!-- Door knob -->
+  <circle cx="430" cy="340" r="4" fill="#c9a84c"/>
+  <!-- Door sidelight windows -->
+  <rect x="348" y="295" width="15" height="75" fill="#8ab4c8" opacity="0.6" rx="1"/>
+  <rect x="437" y="295" width="15" height="75" fill="#8ab4c8" opacity="0.6" rx="1"/>
+
+  <!-- Windows -->
+  <!-- Left pair -->
+  <rect x="225" y="240" width="55" height="55" fill="#8ab4c8" rx="1"/>
+  <line x1="252" y1="240" x2="252" y2="295" stroke="#6a94a8" stroke-width="2"/>
+  <line x1="225" y1="268" x2="280" y2="268" stroke="#6a94a8" stroke-width="2"/>
+  <rect x="225" y="240" width="55" height="55" fill="white" opacity="0.15" rx="1"/>
+  <!-- Left window box with flowers -->
+  <rect x="223" y="294" width="59" height="10" fill="#8b5e3c" rx="1"/>
+  <circle cx="233" cy="292" r="5" fill="#e85a4f" opacity="0.9"/>
+  <circle cx="245" cy="290" r="5" fill="#e85a4f" opacity="0.9"/>
+  <circle cx="257" cy="292" r="5" fill="#f0a0a0" opacity="0.9"/>
+  <circle cx="269" cy="290" r="5" fill="#e85a4f" opacity="0.9"/>
+
+  <!-- Right pair -->
+  <rect x="520" y="240" width="55" height="55" fill="#8ab4c8" rx="1"/>
+  <line x1="547" y1="240" x2="547" y2="295" stroke="#6a94a8" stroke-width="2"/>
+  <line x1="520" y1="268" x2="575" y2="268" stroke="#6a94a8" stroke-width="2"/>
+  <rect x="520" y="240" width="55" height="55" fill="white" opacity="0.15" rx="1"/>
+  <rect x="518" y="294" width="59" height="10" fill="#8b5e3c" rx="1"/>
+  <circle cx="528" cy="292" r="5" fill="#e85a4f" opacity="0.9"/>
+  <circle cx="540" cy="290" r="5" fill="#f0a0a0" opacity="0.9"/>
+  <circle cx="552" cy="292" r="5" fill="#e85a4f" opacity="0.9"/>
+  <circle cx="564" cy="290" r="5" fill="#e85a4f" opacity="0.9"/>
+
+  <!-- Gable window -->
+  <polygon points="355,140 400,110 445,140" fill="#8ab4c8" opacity="0.7"/>
+  <polygon points="362,140 400,116 438,140" fill="white" opacity="0.2"/>
+
+  <!-- Garden path -->
+  <polygon points="350,370 450,370 430,450 370,450" fill="#d4c8b0"/>
+  <!-- Path stones -->
+  <ellipse cx="400" cy="380" rx="15" ry="6" fill="#c8bca8" opacity="0.6"/>
+  <ellipse cx="400" cy="400" rx="15" ry="6" fill="#c8bca8" opacity="0.6"/>
+  <ellipse cx="400" cy="420" rx="15" ry="6" fill="#c8bca8" opacity="0.6"/>
+  <ellipse cx="400" cy="440" rx="15" ry="6" fill="#c8bca8" opacity="0.6"/>
+
+  <!-- Garden bushes -->
+  <ellipse cx="300" cy="355" rx="35" ry="22" fill="#3a6e28"/>
+  <ellipse cx="280" cy="348" rx="25" ry="18" fill="#4a8030" opacity="0.8"/>
+  <ellipse cx="320" cy="345" rx="22" ry="16" fill="#3a6e28" opacity="0.9"/>
+
+  <ellipse cx="500" cy="355" rx="35" ry="22" fill="#3a6e28"/>
+  <ellipse cx="518" cy="348" rx="25" ry="18" fill="#4a8030" opacity="0.8"/>
+  <ellipse cx="485" cy="345" rx="22" ry="16" fill="#3a6e28" opacity="0.9"/>
+
+  <!-- Foreground trees flanking -->
+  <rect x="135" y="270" width="10" height="105" fill="#6b4c2a"/>
+  <ellipse cx="140" cy="248" rx="40" ry="46" fill="#3a6e28" filter="url(#treeshadow)"/>
+  <ellipse cx="122" cy="265" rx="28" ry="32" fill="#4a8030" opacity="0.8"/>
+  <ellipse cx="158" cy="260" rx="26" ry="30" fill="#3a6e28" opacity="0.85"/>
+
+  <rect x="648" y="265" width="10" height="110" fill="#6b4c2a"/>
+  <ellipse cx="653" cy="242" rx="42" ry="48" fill="#3a6e28" filter="url(#treeshadow)"/>
+  <ellipse cx="635" cy="260" rx="30" ry="34" fill="#4a8030" opacity="0.8"/>
+  <ellipse cx="670" cy="255" rx="28" ry="32" fill="#3a6e28" opacity="0.85"/>
+
+  <!-- Label bar -->
+  <rect x="0" y="390" width="800" height="60" fill="#2a1a0a" opacity="0.75"/>
+  <text x="400" y="416" font-family="Georgia, serif" font-size="13" fill="#c9a84c" text-anchor="middle" letter-spacing="3">456 OAK AVENUE · ROCKRIDGE · OAKLAND</text>
+  <text x="400" y="438" font-family="Georgia, serif" font-size="11" fill="white" text-anchor="middle" opacity="0.5" letter-spacing="1">CRAFTSMAN BUNGALOW · CHEF'S KITCHEN · PRIVATE GARDEN</text>
+</svg>
