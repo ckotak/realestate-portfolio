@@ -28,8 +28,15 @@ const listings = (await getCollection('listings')).sort(
           status === 'Active'
             ? 'bg-gold text-charcoal'
             : status === 'Under Contract'
-            ? 'bg-white/10 text-white'
-            : 'bg-white/20 text-white/60';
+            ? 'bg-charcoal text-white ring-1 ring-white/25'
+            : 'bg-neutral-500 text-white';
+
+        const badgeDot =
+          status === 'Active'
+            ? 'bg-charcoal/40'
+            : status === 'Under Contract'
+            ? 'bg-gold'
+            : 'bg-white/50';
 
         return (
           <div
@@ -50,7 +57,8 @@ const listings = (await getCollection('listings')).sort(
                 </div>
               )}
               <!-- Status badge -->
-              <span class={`absolute top-3 left-3 text-xs font-semibold uppercase tracking-widest px-3 py-1 ${badgeClass}`}>
+              <span class={`absolute top-3 left-3 flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold uppercase tracking-widest shadow-[0_2px_12px_rgba(0,0,0,0.55)] ${badgeClass}`}>
+                <span class={`w-1.5 h-1.5 rounded-full shrink-0 ${badgeDot}`}></span>
                 {status}
               </span>
             </div>
