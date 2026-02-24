@@ -7,4 +7,5 @@ sqft: 3750
 status: "Sold"
 photo: "/listings/789-pacific.svg"
 description: "Majestic Pacific Heights Edwardian with bay views, formal entertaining rooms, and a beautifully landscaped garden."
+url: "https://www.mls.com"
 ---

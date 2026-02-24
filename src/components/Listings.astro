@@ -20,16 +20,16 @@ const listings = (await getCollection('listings')).sort(
       </h2>
       <div class="flex flex-wrap justify-center gap-3 mt-8 reveal" id="filter-pills">
         <button data-filter="All" data-active class="cursor-pointer rounded-full px-5 py-2 text-xs font-bold uppercase tracking-widest transition-colors bg-gold text-charcoal">All</button>
-        <button data-filter="Active" class="cursor-pointer rounded-full px-5 py-2 text-xs font-bold uppercase tracking-widest transition-colors border border-white/20 text-white/60 hover:text-white"><span class="pill-plus">+ </span>Active</button>
-        <button data-filter="Under Contract" class="cursor-pointer rounded-full px-5 py-2 text-xs font-bold uppercase tracking-widest transition-colors border border-white/20 text-white/60 hover:text-white"><span class="pill-plus">+ </span>Under Contract</button>
-        <button data-filter="Sold" class="cursor-pointer rounded-full px-5 py-2 text-xs font-bold uppercase tracking-widest transition-colors border border-white/20 text-white/60 hover:text-white"><span class="pill-plus">+ </span>Sold</button>
+        <button data-filter="Active" class="cursor-pointer rounded-full px-5 py-2 text-xs font-bold uppercase tracking-widest transition-colors border border-white/20 text-white/60 hover:text-white">Active</button>
+        <button data-filter="Under Contract" class="cursor-pointer rounded-full px-5 py-2 text-xs font-bold uppercase tracking-widest transition-colors border border-white/20 text-white/60 hover:text-white">Under Contract</button>
+        <button data-filter="Sold" class="cursor-pointer rounded-full px-5 py-2 text-xs font-bold uppercase tracking-widest transition-colors border border-white/20 text-white/60 hover:text-white">Sold</button>
       </div>
       <p id="filter-hint" class="text-white/30 text-xs mt-3 uppercase tracking-widest transition-opacity duration-300">Select one or more to filter</p>
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
       {listings.map((listing, i) => {
-        const { address, price, beds, baths, sqft, status, photo, description } = listing.data;
+        const { address, price, beds, baths, sqft, status, photo, description, url } = listing.data;
 
         const badgeClass =
           status === 'Active'
@@ -45,10 +45,20 @@ const listings = (await getCollection('listings')).sort(
             ? 'bg-gold'
             : 'bg-white/50';
 
+        const specs = [
+          beds != null && `${beds} bd`,
+          baths != null && `${baths} ba`,
+          sqft != null && `${sqft.toLocaleString()} sq ft`,
+        ].filter(Boolean);
+
+        const CardWrapper = url ? 'a' : 'div';
+        const cardProps = url ? { href: url, target: '_blank', rel: 'noopener noreferrer' } : {};
+
         return (
-          <div
+          <CardWrapper
+            {...cardProps}
             data-status={status}
-            class="reveal border border-white/10 hover:border-gold transition-colors group overflow-hidden"
+            class={`reveal border border-white/10 hover:border-gold transition-colors group overflow-hidden${url ? ' block' : ''}`}
             style={`transition-delay: ${i * 100}ms`}
           >
             <!-- Photo -->
@@ -56,7 +66,7 @@ const listings = (await getCollection('listings')).sort(
               {photo ? (
                 <img
                   src={import.meta.env.BASE_URL.replace(/\/$/, '') + photo}
-                  alt={address}
+                  alt={address || 'Property listing'}
                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               ) : (
@@ -73,31 +83,32 @@ const listings = (await getCollection('listings')).sort(
 
             <!-- Card body -->
             <div class="p-6">
-              <p class="text-white/40 text-xs uppercase tracking-[0.15em] mb-2">
-                {address}
-              </p>
-              <p class="font-display text-3xl text-gold leading-none mb-4">
-                {price}
-              </p>
-              <p class="text-white/50 text-sm mb-4">
-                {beds} bd &middot; {baths} ba &middot; {sqft.toLocaleString()} sq ft
-              </p>
-              <p class="text-white/70 text-sm leading-relaxed">
-                {description}
-              </p>
+              {address && (
+                <p class="text-white/40 text-xs uppercase tracking-[0.15em] mb-2">
+                  {address}
+                </p>
+              )}
+              {price && (
+                <p class="font-display text-3xl text-gold leading-none mb-4">
+                  {price}
+                </p>
+              )}
+              {specs.length > 0 && (
+                <p class="text-white/50 text-sm mb-4" set:html={specs.join(' &middot; ')} />
+              )}
+              {description && (
+                <p class="text-white/70 text-sm leading-relaxed">
+                  {description}
+                </p>
+              )}
             </div>
-          </div>
+          </CardWrapper>
         );
       })}
     </div>
 
   </div>
 </section>
-
-<style>
-  #filter-pills .pill-plus { display: none; }
-  #filter-pills button:not([data-active]):hover .pill-plus { display: inline; }
-</style>
 
 <script>
   const allPill = document.querySelector('#filter-pills button[data-filter="All"]');
