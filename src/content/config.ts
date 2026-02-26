@@ -9,6 +9,7 @@ const listings = defineCollection({
     baths: z.number().optional(),
     sqft: z.number().optional(),
     status: z.enum(['Active', 'Under Contract', 'Sold']),
+    order: z.number(),
     photo: z.string().optional(),
     description: z.string().optional(),
     url: z.string().url().optional(),

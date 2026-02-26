@@ -5,6 +5,7 @@ beds: 3
 baths: 2
 sqft: 1850
 status: "Active"
+order: 1
 photo: "/listings/123-main.svg"
 description: "A stunning modern townhome in SOMA with panoramic city views and designer finishes throughout."
 url: "https://www.mls.com"

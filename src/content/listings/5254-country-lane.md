@@ -5,6 +5,7 @@ beds: 1
 baths: 1
 sqft: 1200
 status: "Under Contract"
+order: 4
 photo: "/listings/456-oak.svg"
 description: "This is what you get for the price these days. I hope you love it as-is!"
 url: "https://www.mls.com"
