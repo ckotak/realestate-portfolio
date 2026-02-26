@@ -1,26 +1,7 @@
 ---
-const reasons = [
-  {
-    icon: '◆',
-    title: 'Market Mastery',
-    body: 'Deep neighborhood expertise — pricing, timing, and trends that give you a decisive edge.',
-  },
-  {
-    icon: '◆',
-    title: 'Fierce Negotiator',
-    body: "I've closed deals in multi-offer wars, complex estates, and off-market situations. Your interests come first.",
-  },
-  {
-    icon: '◆',
-    title: 'Full-Service Support',
-    body: 'From staging and photography to lenders and contractors — my network becomes your network.',
-  },
-  {
-    icon: '◆',
-    title: 'Transparent Process',
-    body: "No jargon, no surprises. You'll always know exactly where you stand and what comes next.",
-  },
-];
+import { getCollection } from 'astro:content';
+
+const reasons = (await getCollection('whyme')).sort((a, b) => a.data.order - b.data.order);
 ---
 
 <section id="why-me" class="bg-white py-24 px-6">
@@ -42,13 +23,13 @@ const reasons = [
           style={`transition-delay: ${i * 100}ms`}
         >
           <div class="text-gold text-2xl mb-4 group-hover:scale-110 transition-transform">
-            {reason.icon}
+            {reason.data.icon}
           </div>
           <h3 class="font-display text-2xl text-charcoal uppercase mb-3">
-            {reason.title}
+            {reason.data.title}
           </h3>
           <p class="text-charcoal/60 text-sm leading-relaxed">
-            {reason.body}
+            {reason.data.body}
           </p>
         </div>
       ))}

@@ -1,9 +1,9 @@
 ---
-const stats = [
-  { number: '500+', label: 'Homes Sold' },
-  { number: '$2B+', label: 'In Volume' },
-  { number: '98%', label: 'Client Satisfaction' },
-];
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry('about', 'bio');
+const { heading, stats } = entry.data;
+const { Content } = await entry.render();
 ---
 
 <section id="about" class="bg-offwhite py-24 px-6">
@@ -27,19 +27,12 @@ const stats = [
         About Me
       </p>
       <h2 class="font-display text-[clamp(3rem,6vw,5rem)] leading-none text-charcoal uppercase mb-6 reveal">
-        15 Years.<br/>Thousands of Deals.<br/>One Goal.
+        {heading.split('\n').map((line, i, arr) => (
+          <>{line}{i < arr.length - 1 && <br/>}</>
+        ))}
       </h2>
-      <div class="space-y-4 text-charcoal/70 leading-relaxed reveal">
-        <p>
-          I'm Chetan Kotak — a real estate agent with over 15 years
-          of experience helping buyers, sellers, and investors navigate one
-          of the most competitive markets in the country.
-        </p>
-        <p>
-          My approach is simple: data-driven strategy, relentless
-          negotiation, and white-glove service from first showing to
-          closing day.
-        </p>
+      <div class="space-y-4 text-charcoal/70 leading-relaxed reveal [&>p]:mb-0">
+        <Content />
       </div>
 
       <!-- Stats row -->

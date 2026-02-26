@@ -15,4 +15,25 @@ const listings = defineCollection({
   }),
 });
 
-export const collections = { listings };
+const about = defineCollection({
+  type: 'content',
+  schema: z.object({
+    heading: z.string(),
+    stats: z.array(z.object({
+      number: z.string(),
+      label: z.string(),
+    })),
+  }),
+});
+
+const whyme = defineCollection({
+  type: 'content',
+  schema: z.object({
+    icon: z.string(),
+    title: z.string(),
+    body: z.string(),
+    order: z.number(),
+  }),
+});
+
+export const collections = { listings, about, whyme };
