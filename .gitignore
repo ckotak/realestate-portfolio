@@ -12,3 +12,9 @@ dist/
 
 # OS
 .DS_Store
+
+# Claude Code local files
+.claude/settings.local.json
+.claude/CLAUDE.local.md
+.claude/agent-memory-local/
+.claude/projects/
