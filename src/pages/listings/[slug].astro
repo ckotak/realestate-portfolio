@@ -1,0 +1,199 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const listings = await getCollection('listings');
+  // Only generate detail pages for listings that have an address
+  return listings
+    .filter((listing) => listing.data.address)
+    .map((listing) => ({
+      params: { slug: listing.id }, // Astro 5: use .id, not .slug
+      props: { listing },
+    }));
+}
+
+const { listing } = Astro.props;
+const {
+  address,
+  price,
+  beds,
+  baths,
+  sqft,
+  status,
+  photo,
+  description,
+  url,
+  gallery,
+  propertyType,
+  yearBuilt,
+  lotSize,
+  garages,
+  hoa,
+  highlights,
+  mlsNumber,
+} = listing.data;
+
+const slug = listing.id; // Astro 5: use .id, not .slug
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+// Note: Sold badge uses design system value 'bg-neutral-500/20 text-neutral-400'
+// Task 3 aligns Listings.astro to match — both card and detail page use the same classes
+// so the View Transitions morph is visually seamless.
+const badgeClass =
+  status === 'Active'
+    ? 'bg-gold text-charcoal'
+    : status === 'Under Contract'
+    ? 'bg-charcoal text-white ring-1 ring-white/25'
+    : 'bg-neutral-500/20 text-neutral-400';
+
+const badgeDot =
+  status === 'Active'
+    ? 'bg-charcoal/40'
+    : status === 'Under Contract'
+    ? 'bg-gold'
+    : 'bg-white/50';
+
+const specs = [
+  beds != null && `${beds} bd`,
+  baths != null && `${baths} ba`,
+  sqft != null && `${sqft.toLocaleString()} sq ft`,
+  propertyType,
+].filter(Boolean);
+
+const detailSpecs = [
+  yearBuilt && { label: 'Year Built', value: String(yearBuilt) },
+  lotSize && { label: 'Lot Size', value: lotSize },
+  garages != null && { label: 'Garage', value: `${garages} space${garages !== 1 ? 's' : ''}` },
+  hoa && { label: 'HOA', value: hoa },
+  mlsNumber && { label: 'MLS #', value: mlsNumber },
+].filter(Boolean) as { label: string; value: string }[];
+---
+
+<BaseLayout
+  title={`${address} | Chetan Kotak`}
+  description={description ?? 'Property listing by Chetan Kotak.'}
+>
+  <div class="min-h-screen bg-charcoal text-white">
+
+    <!-- Hero image -->
+    <div class="relative w-full aspect-video max-h-[60vh] overflow-hidden" transition:name={`listing-photo-${slug}`}>
+      {photo ? (
+        <img
+          src={`${base}${photo}`}
+          alt={address ?? 'Property listing'}
+          class="w-full h-full object-cover"
+        />
+      ) : (
+        <div class="w-full h-full bg-gradient-to-br from-gold/20 to-charcoal flex items-center justify-center">
+          <span class="text-gold text-6xl opacity-30">◆</span>
+        </div>
+      )}
+      <!-- Status badge -->
+      <span
+        transition:name={`listing-badge-${slug}`}
+        class={`absolute top-4 left-4 flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold uppercase tracking-widest shadow-[0_2px_12px_rgba(0,0,0,0.55)] ${badgeClass}`}
+      >
+        <span class={`w-1.5 h-1.5 rounded-full shrink-0 ${badgeDot}`}></span>
+        {status}
+      </span>
+    </div>
+
+    <!-- Property header -->
+    <div class="px-6 py-10 max-w-6xl mx-auto border-b border-white/10">
+      {address && (
+        <p transition:name={`listing-address-${slug}`} class="text-white/40 text-xs uppercase tracking-[0.15em] mb-3">
+          {address}
+        </p>
+      )}
+      {price && (
+        <p transition:name={`listing-price-${slug}`} class="font-display text-[clamp(3rem,6vw,5rem)] text-gold leading-none mb-6">
+          {price}
+        </p>
+      )}
+      {specs.length > 0 && (
+        <p class="text-white/50 text-sm" set:html={specs.join(' &middot; ')} />
+      )}
+    </div>
+
+    <!-- Gallery strip (only if gallery field is present) -->
+    {gallery && gallery.length > 0 && (
+      <div class="px-6 py-8 max-w-6xl mx-auto">
+        <div class="flex gap-4 overflow-x-auto pb-2 scrollbar-thin">
+          {gallery.map((imgPath) => (
+            <div class="shrink-0 w-64 aspect-video overflow-hidden border border-white/10">
+              <img
+                src={`${base}${imgPath}`}
+                alt={`${address ?? 'Property'} photo`}
+                class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <!-- Two-column body -->
+    <div class="px-6 py-12 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-12">
+
+      <!-- Left: description + highlights -->
+      <div class="lg:col-span-2 space-y-8">
+        {description && (
+          <div>
+            <h2 class="font-display text-2xl text-white uppercase mb-4">About this property</h2>
+            <p class="text-white/70 leading-relaxed">{description}</p>
+          </div>
+        )}
+        {highlights && highlights.length > 0 && (
+          <div>
+            <h2 class="font-display text-2xl text-white uppercase mb-4">Highlights</h2>
+            <ul class="space-y-2">
+              {highlights.map((item) => (
+                <li class="flex items-start gap-3 text-white/70 text-sm">
+                  <span class="text-gold mt-0.5 shrink-0">◆</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+
+      <!-- Right: specs card -->
+      {detailSpecs.length > 0 && (
+        <div class="border border-white/10 p-6 self-start">
+          <h2 class="font-display text-xl text-white uppercase mb-4">Property Details</h2>
+          <dl class="space-y-3">
+            {detailSpecs.map(({ label, value }) => (
+              <div class="flex justify-between gap-4 text-sm border-b border-white/5 pb-3 last:border-0 last:pb-0">
+                <dt class="text-white/40 uppercase tracking-widest text-xs">{label}</dt>
+                <dd class="text-white/80 text-right">{value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      )}
+    </div>
+
+    <!-- External MLS link + back navigation -->
+    <div class="px-6 pb-16 max-w-6xl mx-auto flex flex-wrap items-center gap-4">
+      {url && (
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 border border-white/20 hover:border-gold text-white/60 hover:text-gold transition-colors px-6 py-3 text-sm uppercase tracking-widest"
+        >
+          View on MLS ↗
+        </a>
+      )}
+      <a
+        href={`${base}/#listings`}
+        class="inline-flex items-center gap-2 text-white/50 hover:text-gold transition-colors text-sm uppercase tracking-widest"
+      >
+        <span>←</span> Back to listings
+      </a>
+    </div>
+
+  </div>
+</BaseLayout>
