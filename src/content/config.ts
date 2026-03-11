@@ -13,6 +13,14 @@ const listings = defineCollection({
     photo: z.string().optional(),
     description: z.string().optional(),
     url: z.string().url().optional(),
+    gallery: z.array(z.string()).optional(),
+    propertyType: z.string().optional(),
+    yearBuilt: z.number().optional(),
+    lotSize: z.string().optional(),
+    garages: z.number().optional(),
+    hoa: z.string().optional(),
+    highlights: z.array(z.string()).optional(),
+    mlsNumber: z.string().optional(),
   }),
 });
 
