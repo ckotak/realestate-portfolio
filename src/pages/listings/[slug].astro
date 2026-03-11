@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
 
 export async function getStaticPaths() {
   const listings = await getCollection('listings');
@@ -71,9 +72,10 @@ const detailSpecs = [
 ---
 
 <BaseLayout
-  title={`${address} | Chetan Kotak`}
+  title={`${address ?? 'Property'} | Chetan Kotak`}
   description={description ?? 'Property listing by Chetan Kotak.'}
 >
+  <Nav />
   <div class="min-h-screen bg-charcoal text-white">
 
     <!-- Hero image -->
@@ -92,7 +94,7 @@ const detailSpecs = [
       <!-- Status badge -->
       <span
         transition:name={`listing-badge-${slug}`}
-        class={`absolute top-4 left-4 flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold uppercase tracking-widest shadow-[0_2px_12px_rgba(0,0,0,0.55)] ${badgeClass}`}
+        class={`absolute top-3 left-3 flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold uppercase tracking-widest shadow-[0_2px_12px_rgba(0,0,0,0.55)] ${badgeClass}`}
       >
         <span class={`w-1.5 h-1.5 rounded-full shrink-0 ${badgeDot}`}></span>
         {status}
@@ -119,7 +121,7 @@ const detailSpecs = [
     <!-- Gallery strip (only if gallery field is present) -->
     {gallery && gallery.length > 0 && (
       <div class="px-6 py-8 max-w-6xl mx-auto">
-        <div class="flex gap-4 overflow-x-auto pb-2 scrollbar-thin">
+        <div class="flex gap-4 overflow-x-auto pb-2">
           {gallery.map((imgPath) => (
             <div class="shrink-0 w-64 aspect-video overflow-hidden border border-white/10">
               <img
