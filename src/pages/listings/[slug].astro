@@ -8,7 +8,7 @@ export async function getStaticPaths() {
   return listings
     .filter((listing) => listing.data.address)
     .map((listing) => ({
-      params: { slug: listing.id }, // Astro 5: use .id, not .slug
+      params: { slug: listing.id.replace(/\.md$/, '') }, // strip extension for clean URLs
       props: { listing },
     }));
 }
@@ -34,7 +34,7 @@ const {
   mlsNumber,
 } = listing.data;
 
-const slug = listing.id; // Astro 5: use .id, not .slug
+const slug = listing.id.replace(/\.md$/, ''); // Astro 5: .id includes extension, strip for URL use
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 // Note: Sold badge uses design system value 'bg-neutral-500/20 text-neutral-400'

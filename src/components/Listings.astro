@@ -28,7 +28,7 @@ const listings = (await getCollection('listings')).sort(
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
       {listings.map((listing, i) => {
         const { address, price, beds, baths, sqft, status, photo, description, url } = listing.data;
-        const slug = listing.id; // Astro 5: use .id, not .slug
+        const slug = listing.id.replace(/\.md$/, ''); // Astro 5: .id includes extension, strip for URL use
 
         const badgeClass =
           status === 'Active'
