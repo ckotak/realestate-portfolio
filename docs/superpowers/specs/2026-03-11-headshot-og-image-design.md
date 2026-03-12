@@ -12,6 +12,7 @@ Two related changes:
 
 ## Files Changed
 
+- `src/assets/` — new directory (create before adding the image)
 - `src/assets/headshot.png` — new placeholder image (to be replaced with real photo)
 - `src/components/About.astro` — swap placeholder div for `<Picture />` component
 - `src/layouts/BaseLayout.astro` — add `og:image:type` meta tag
@@ -43,20 +44,22 @@ import headshot from '../assets/headshot.png';
 <Picture
   src={headshot}
   formats={['webp', 'jpeg']}
-  widths={[400, 800]}
-  sizes="(max-width: 768px) 100vw, 50vw"
+  widths={[400, 600, 800]}
+  sizes="(max-width: 768px) 100vw, min(576px, 50vw)"
   alt="Chetan Kotak, Real Estate Agent"
   class="w-full h-full object-cover"
-  loading="lazy"
+  loading="eager"
 />
 ```
+
+Note on `loading="eager"`: the About section is immediately below the Hero and is typically visible on first paint or one short scroll. Lazy loading would delay the request and cause a layout shift. `eager` ensures the image is fetched as a priority resource.
 
 **What stays unchanged:**
 - The outer `aspect-[3/4] bg-lightgray relative overflow-hidden` container
 - The gold offset border decoration `div` (`absolute inset-0 border-4 border-gold translate-x-4 translate-y-4 -z-10`)
 - The `reveal` scroll animation class on the parent div
 
-**Output:** Astro generates WebP and JPEG variants at 400px and 800px widths. The browser picks the best format and resolution automatically. No JavaScript fallback needed — Astro validates the image at build time.
+**Output:** Astro generates WebP and JPEG variants at 400px, 600px, and 800px widths. The browser picks the best format and resolution automatically. No JavaScript fallback needed — Astro validates the image at build time.
 
 ---
 
@@ -81,9 +84,11 @@ Add one line after the existing `og:image:height` tag:
 
 ## Acceptance Criteria
 
+- [ ] `src/assets/` directory created
 - [ ] `src/assets/headshot.png` exists and is a valid 600×800px PNG
 - [ ] About section renders the image (not the gradient div) at both mobile and desktop sizes
 - [ ] Image has `alt="Chetan Kotak, Real Estate Agent"`
+- [ ] Image `loading` attribute is `eager` — not `lazy`
 - [ ] Gold offset border decoration remains visible
 - [ ] `og:image:type` meta tag present in page `<head>`
 - [ ] Production build succeeds (`npm run build`)
