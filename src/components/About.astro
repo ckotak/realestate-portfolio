@@ -1,5 +1,7 @@
 ---
 import { getEntry } from 'astro:content';
+import { Picture } from 'astro:assets';
+import headshot from '../assets/headshot.png';
 
 const entry = await getEntry('about', 'bio');
 const { heading, stats } = entry.data;
@@ -12,10 +14,15 @@ const { Content } = await entry.render();
     <!-- Photo column -->
     <div class="reveal">
       <div class="aspect-[3/4] bg-lightgray relative overflow-hidden">
-        <!-- Replace with actual headshot -->
-        <div class="w-full h-full bg-gradient-to-br from-charcoal-90 to-charcoal flex items-center justify-center">
-          <span class="font-display text-6xl text-gold/30">CK</span>
-        </div>
+        <Picture
+          src={headshot}
+          formats={['webp', 'jpeg']}
+          widths={[400, 600, 800]}
+          sizes="(max-width: 768px) 100vw, min(576px, 50vw)"
+          alt="Chetan Kotak, Real Estate Agent"
+          class="w-full h-full object-cover"
+          loading="eager"
+        />
         <!-- Gold accent border -->
         <div class="absolute inset-0 border-4 border-gold translate-x-4 translate-y-4 -z-10"></div>
       </div>
