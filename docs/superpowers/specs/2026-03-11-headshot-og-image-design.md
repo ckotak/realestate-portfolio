@@ -23,6 +23,8 @@ Two related changes:
 
 Create a 600×800px PNG (3:4 aspect ratio matching the existing `aspect-[3/4]` container).
 
+**Dimensions:** 900×1200px (3:4 portrait). Using 900px width (not 600px) ensures Astro can generate all three output variants (400px, 600px, 800px) without upscaling.
+
 **Style:** Dark gradient background (#1a1a1a → #0f0f0f) with "CK" initials centered in gold (`#C9A84C`), matching the current placeholder div appearance. This ensures the image looks intentional during development.
 
 **Replacement workflow:** When a real headshot is available, replace `src/assets/headshot.png` (or `.jpg`/`.webp`) and update the import path in `About.astro`. Astro regenerates all optimized formats at build time.
@@ -85,7 +87,7 @@ Add one line after the existing `og:image:height` tag:
 ## Acceptance Criteria
 
 - [ ] `src/assets/` directory created
-- [ ] `src/assets/headshot.png` exists and is a valid 600×800px PNG
+- [ ] `src/assets/headshot.png` exists and is a valid 900×1200px PNG
 - [ ] About section renders the image (not the gradient div) at both mobile and desktop sizes
 - [ ] Image has `alt="Chetan Kotak, Real Estate Agent"`
 - [ ] Image `loading` attribute is `eager` — not `lazy`
