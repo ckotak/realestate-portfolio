@@ -2,6 +2,7 @@
 import { getEntry } from 'astro:content';
 import { Picture } from 'astro:assets';
 import headshot from '../assets/headshot.png';
+import { brand } from '../config/brand';
 
 const entry = await getEntry('about', 'bio');
 const { heading, stats } = entry.data;
@@ -19,7 +20,7 @@ const { Content } = await entry.render();
           formats={['webp', 'jpeg']}
           widths={[400, 600, 800]}
           sizes="(max-width: 768px) 100vw, min(576px, 50vw)"
-          alt="Chetan Kotak, Real Estate Agent"
+          alt={`${brand.agent.name}, ${brand.agent.title.replace('Licensed ', '')}`}
           class="w-full h-full object-cover"
           loading="eager"
         />

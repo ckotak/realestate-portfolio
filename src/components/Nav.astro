@@ -1,4 +1,6 @@
 ---
+import { brand } from '../config/brand';
+
 const navLinks = [
   { href: '#about', label: 'About' },
   { href: '#why-me', label: 'Why Me' },
@@ -11,7 +13,7 @@ const navLinks = [
   <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
 
     <a href="#" class="font-display text-2xl text-white tracking-wider hover:text-gold transition-colors">
-      CHETAN KOTAK
+      {brand.agent.name.toUpperCase()}
     </a>
 
     <!-- Desktop links -->

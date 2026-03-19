@@ -1,22 +1,5 @@
 @import "tailwindcss";
-
-/* ─── CUSTOM THEME ────────────────────────────────────────────────── */
-@theme {
-  /* Brand colors */
-  --color-charcoal: #0f0f0f;
-  --color-charcoal-90: #1a1a1a;
-  --color-gold: #C9A84C;
-  --color-gold-hover: #dbb96a;
-  --color-offwhite: #f9f9f7;
-  --color-lightgray: #f2f2f0;
-
-  /* Typography */
-  --font-display: 'Bebas Neue', 'Arial Narrow', sans-serif;
-  --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
-
-  /* Custom animation */
-  --animate-fade-up: fade-up 0.6s ease-out forwards;
-}
+@import "./theme-tokens.css";
 
 @keyframes fade-up {
   from {

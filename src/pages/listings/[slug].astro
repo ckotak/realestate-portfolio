@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Nav from '../../components/Nav.astro';
+import { brand } from '../../config/brand';
 
 export async function getStaticPaths() {
   const listings = await getCollection('listings');
@@ -72,8 +73,8 @@ const detailSpecs = [
 ---
 
 <BaseLayout
-  title={`${address ?? 'Property'} | Chetan Kotak`}
-  description={description ?? 'Property listing by Chetan Kotak.'}
+  title={`${address ?? 'Property'} | ${brand.agent.name}`}
+  description={description ?? `Property listing by ${brand.agent.name}.`}
 >
   <Nav />
   <div class="min-h-screen bg-charcoal text-white pt-16">
