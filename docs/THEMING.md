@@ -47,40 +47,60 @@ You do **not** need to run this after changing identity, contact, social, locati
 
 ## Customizing Fonts
 
-1. Update `theme.fonts.display` and/or `theme.fonts.body` in `brand.ts` with a full CSS `font-family` string:
+The site uses two fonts: a **display** font for headings (default: Bebas Neue via Google Fonts) and a **body** font for text (default: Inter via `@fontsource`).
 
-   ```ts
-   fonts: {
-     display: "'Playfair Display', Georgia, serif",
-     body: "'Lato', ui-sans-serif, system-ui, sans-serif",
-   },
-   ```
+### 1. Update the font-family in `brand.ts`
 
-2. Load the font files. Choose one approach:
+Set `theme.fonts.display` and/or `theme.fonts.body` to a full CSS `font-family` string including fallbacks:
 
-   **Google Fonts** -- Update the `<link>` tag in `src/layouts/BaseLayout.astro`:
-   ```html
-   <link
-     href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap"
-     rel="stylesheet"
-   />
-   ```
+```ts
+fonts: {
+  display: "'Playfair Display', Georgia, serif",
+  body: "'Lato', ui-sans-serif, system-ui, sans-serif",
+},
+```
 
-   **@fontsource** -- Install the package and update the import in `BaseLayout.astro`:
-   ```bash
-   npm install @fontsource/lato
-   npm uninstall @fontsource/inter   # remove the old one
-   ```
-   ```ts
-   // In BaseLayout.astro frontmatter
-   import "@fontsource/lato";
-   ```
+### 2. Load the font files
 
-3. Regenerate CSS tokens:
+You need to load the actual font files for the browser. The site uses two methods:
 
-   ```bash
-   npm run theme
-   ```
+**Display font (Google Fonts)** -- Update the `<link>` tag in `src/layouts/BaseLayout.astro`:
+```html
+<link
+  href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap"
+  rel="stylesheet"
+/>
+```
+
+**Body font (@fontsource)** -- Install the new package and remove the old one:
+```bash
+npm install @fontsource/lato
+npm uninstall @fontsource/inter
+```
+
+### 3. Update font weight imports in `BaseLayout.astro`
+
+The body font is imported by weight in `src/layouts/BaseLayout.astro` frontmatter. You must update these imports to match the weights your new font needs. The site uses **regular (400)** and **semibold (600)**:
+
+```ts
+// Replace these lines in BaseLayout.astro frontmatter:
+import '@fontsource/inter/400.css';  // remove
+import '@fontsource/inter/600.css';  // remove
+
+// With your new font's weights:
+import '@fontsource/lato/400.css';
+import '@fontsource/lato/700.css';   // use whatever weight the font offers for bold
+```
+
+Not all fonts offer the same weights. Check your font's `@fontsource` package or Google Fonts page to see which weights are available. At minimum you need a regular weight (400) and a bold/semibold weight.
+
+For Google Fonts, specify the weights you need in the URL's `wght@` parameter instead (e.g., `wght@400;700`).
+
+### 4. Regenerate CSS tokens
+
+```bash
+npm run theme
+```
 
 ## Build and Deploy
 
