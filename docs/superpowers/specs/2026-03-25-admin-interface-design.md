@@ -157,6 +157,7 @@ export const brand: BrandConfig = brandData;
 3. Extract the interface to `src/config/brand.types.ts` so the JSON import is cast against it. This preserves union types like `"summary" | "summary_large_image"` and catches invalid CMS edits at build time.
 4. All existing imports of `brand` continue to work unchanged.
 5. Remove or update `src/config/brand.example.ts` to reference the new JSON format.
+6. `brand.json` must be created and committed before the CMS is functional — `file` collections read existing files, they do not create them.
 
 ### Theme Token Generation
 
