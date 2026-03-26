@@ -20,7 +20,7 @@
 │  src/content/listings/   │
 │  src/content/about/      │
 │  src/content/whyme/      │
-│  src/data/brand.json     │
+│  src/config/brand.json   │
 └──────────┬───────────────┘
            │ push to main triggers
            ▼
@@ -63,7 +63,7 @@ Sveltia CMS is an actively maintained, open-source, drop-in replacement for Deca
 ### Setup (one-time)
 
 1. Register a GitHub OAuth App at `github.com/settings/developers`
-   - Callback URL points to the Cloudflare Worker
+   - Callback URL: `https://<worker-name>.<account>.workers.dev/callback`
 2. Deploy `sveltia-cms-auth` Cloudflare Worker with OAuth client ID + secret
 3. Configure `base_url` in `config.yml` to point to the Worker URL
 4. Add Chetan as a collaborator on the repo (write access)
@@ -75,10 +75,10 @@ Sveltia CMS is an actively maintained, open-source, drop-in replacement for Deca
 
 ## Content Collection Mapping
 
-### Listings — folder collection
+### Listings — `folder` collection
 
 - Path: `src/content/listings/*.md`
-- Fields:
+- Fields (must match all fields in `src/content/config.ts` to prevent data loss on save):
   - `address` — string
   - `price` — string
   - `beds` — number
@@ -86,13 +86,23 @@ Sveltia CMS is an actively maintained, open-source, drop-in replacement for Deca
   - `sqft` — number
   - `status` — select widget: "Active", "Under Contract", "Sold"
   - `order` — number
-  - `photo` — file widget (media folder: `public/listings/`)
+  - `photo` — file widget (media folder: `public/listings/`, public folder: `/realestate-portfolio/listings/`)
   - `description` — string (textarea)
-  - `url` — string
+  - `url` — string (pattern-validated as URL)
+  - `gallery` — list widget of strings (image paths)
+  - `propertyType` — string
+  - `yearBuilt` — number
+  - `lotSize` — string
+  - `garages` — number
+  - `hoa` — string
+  - `highlights` — list widget of strings
+  - `mlsNumber` — string
+- All optional fields must be declared in `config.yml` even if hidden in the UI, to prevent Sveltia from stripping them on save.
 - Slug: auto-generated kebab-case from address
 - Create/edit/delete supported
+- Image uploads: accepts SVG, PNG, JPG, WebP. Existing listing images are SVGs; components must handle mixed formats.
 
-### About — single-file collection
+### About — `file` collection
 
 - Path: `src/content/about/bio.md`
 - Fields:
@@ -101,7 +111,7 @@ Sveltia CMS is an actively maintained, open-source, drop-in replacement for Deca
 - Body: markdown editor
 - Edit only (no create/delete)
 
-### WhyMe — folder collection
+### WhyMe — `folder` collection
 
 - Path: `src/content/whyme/*.md`
 - Fields:
@@ -111,9 +121,9 @@ Sveltia CMS is an actively maintained, open-source, drop-in replacement for Deca
   - `order` — number
 - Create/edit/delete supported
 
-### Brand Config — single-file collection
+### Brand Config — `file` collection
 
-- Path: `src/data/brand.json`
+- Path: `src/config/brand.json` (colocated with existing `brand.ts`)
 - Sections (nested object fields):
   - **Agent:** name, title, DRE number
   - **Contact:** phone, phoneRaw, email
@@ -125,20 +135,36 @@ Sveltia CMS is an actively maintained, open-source, drop-in replacement for Deca
 - Edit only (no create/delete)
 - Note: changing font names requires the font files/imports to already exist in the codebase. The CMS can change the string but adding a new font still requires a code change.
 
+### Out of Scope
+
+- Editorial workflow (draft → review → publish) — unnecessary for a single-user site
+- Creating new content collection types — requires code changes to schemas
+
 ## Brand Config Refactor
 
 Currently `src/config/brand.ts` contains both the TypeScript interface and the data. To make it CMS-editable:
 
-1. Extract data to `src/data/brand.json`
-2. Simplify `brand.ts` to a thin wrapper:
+1. Extract data to `src/config/brand.json` (colocated with existing `brand.ts`)
+2. Keep the `BrandConfig` interface for type safety. Simplify `brand.ts` to:
 
 ```ts
-import brandData from '../data/brand.json';
-export type BrandConfig = typeof brandData;
-export const brand = brandData;
+import type { BrandConfig } from './brand.types';
+import brandData from './brand.json';
+export type { BrandConfig };
+export const brand: BrandConfig = brandData;
 ```
 
-3. All existing imports of `brand` continue to work unchanged.
+3. Extract the interface to `src/config/brand.types.ts` so the JSON import is cast against it. This preserves union types like `"summary" | "summary_large_image"` and catches invalid CMS edits at build time.
+4. All existing imports of `brand` continue to work unchanged.
+5. Remove or update `src/config/brand.example.ts` to reference the new JSON format.
+
+### Theme Token Generation
+
+The `scripts/generate-theme.ts` script generates `src/styles/theme-tokens.css` from brand config. After the refactor:
+
+- The script continues to work as-is since it imports from `src/config/brand.ts`, which re-exports the JSON data.
+- The `npm run theme` command must be run after brand config changes to regenerate CSS tokens.
+- Consider adding `npm run theme` as a step in the GitHub Actions build workflow so that CMS edits to theme colors automatically regenerate the CSS tokens during deploy. Without this, color/font changes made via the CMS will not take effect.
 
 ## File Structure
 
@@ -151,8 +177,9 @@ public/admin/
 admin/worker/
   worker.js               ← sveltia-cms-auth OAuth proxy
   wrangler.toml           ← Cloudflare Worker config
-src/data/
+src/config/
   brand.json              ← extracted from brand.ts
+  brand.types.ts          ← BrandConfig interface (extracted from brand.ts)
 .github/workflows/
   deploy-auth-worker.yml  ← manual workflow to deploy the Worker
 ```
@@ -225,3 +252,28 @@ The existing pipeline is untouched:
 4. Deploys to GitHub Pages
 
 The admin page (`public/admin/`) is copied as-is to the output — no Astro processing needed.
+
+**Build workflow update:** Add `npm run theme` before the Astro build step so that CMS edits to theme colors/fonts regenerate the CSS tokens automatically.
+
+## Media Configuration
+
+Sveltia CMS `config.yml` must configure media paths to account for the `/realestate-portfolio` base path:
+
+- `media_folder`: `public/listings` — where files are stored in the repo
+- `public_folder`: `/realestate-portfolio/listings` — the URL prefix written into frontmatter
+
+This ensures photo paths in frontmatter match how Astro components resolve them at runtime.
+
+## Build Failure Handling
+
+If a CMS edit creates content that fails Zod validation (e.g., missing required field, malformed URL), the GitHub Actions build will fail silently from the CMS user's perspective. Mitigations:
+
+- Enable GitHub Actions failure email notifications for the repo
+- Consider adding a simple status badge or deploy-status check on the admin page in a future iteration
+- The CMS `url` field should use a pattern validator in `config.yml` to catch malformed URLs before commit
+
+## Security Considerations
+
+- GitHub repo permissions serve as the sole access control layer
+- The Cloudflare Worker stores the OAuth client secret as an encrypted environment variable, never exposed to the browser
+- If the GitHub OAuth token were compromised, an attacker could commit to the repo. Consider enabling branch protection on `main` (require status checks) as an additional safeguard
