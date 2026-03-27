@@ -1,0 +1,60 @@
+backend:
+  name: github
+  repo: chetankotak/realestate-portfolio
+  branch: main
+  base_url: https://sveltia-cms-auth.YOUR_WORKER.workers.dev
+
+media_folder: public/listings
+public_folder: /realestate-portfolio/listings
+
+collections:
+  - name: listings
+    label: Listings
+    label_singular: Listing
+    folder: src/content/listings
+    create: true
+    delete: true
+    slug: "{{fields.address | slugify}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - { name: address, label: Address, widget: string, required: false }
+      - { name: price, label: Price, widget: string, required: false, hint: "e.g. $1,250,000" }
+      - { name: beds, label: Beds, widget: number, required: false, value_type: int }
+      - { name: baths, label: Baths, widget: number, required: false, value_type: int }
+      - { name: sqft, label: "Sq Ft", widget: number, required: false, value_type: int }
+      - name: status
+        label: Status
+        widget: select
+        options: ["Active", "Under Contract", "Sold"]
+        default: Active
+      - { name: order, label: "Sort Order", widget: number, value_type: int }
+      - name: photo
+        label: "Main Photo"
+        widget: image
+        required: false
+        media_folder: /public/listings
+        public_folder: /realestate-portfolio/listings
+      - { name: description, label: Description, widget: text, required: false }
+      - name: url
+        label: "Listing URL"
+        widget: string
+        required: false
+        pattern: ['^https?://.+', "Must be a valid URL starting with http:// or https://"]
+      - name: gallery
+        label: Gallery
+        widget: list
+        required: false
+        field: { name: image, label: Image, widget: string }
+      - { name: propertyType, label: "Property Type", widget: string, required: false }
+      - { name: yearBuilt, label: "Year Built", widget: number, required: false, value_type: int }
+      - { name: lotSize, label: "Lot Size", widget: string, required: false }
+      - { name: garages, label: Garages, widget: number, required: false, value_type: int }
+      - { name: hoa, label: "HOA", widget: string, required: false }
+      - name: highlights
+        label: Highlights
+        widget: list
+        required: false
+        field: { name: highlight, label: Highlight, widget: string }
+      - { name: mlsNumber, label: "MLS Number", widget: string, required: false }
+      - { name: body, label: Body, widget: markdown, required: false }
