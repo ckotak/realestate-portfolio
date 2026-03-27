@@ -58,3 +58,105 @@ collections:
         field: { name: highlight, label: Highlight, widget: string }
       - { name: mlsNumber, label: "MLS Number", widget: string, required: false }
       - { name: body, label: Body, widget: markdown, required: false }
+
+  - name: about
+    label: About
+    files:
+      - name: bio
+        label: "Bio"
+        file: src/content/about/bio.md
+        format: frontmatter
+        fields:
+          - { name: heading, label: Heading, widget: string }
+          - name: stats
+            label: Stats
+            widget: list
+            fields:
+              - { name: number, label: Number, widget: string, hint: "e.g. 500+" }
+              - { name: label, label: Label, widget: string, hint: "e.g. Homes Sold" }
+          - { name: body, label: Body, widget: markdown }
+
+  - name: whyme
+    label: "Why Me"
+    label_singular: "Card"
+    folder: src/content/whyme
+    create: true
+    delete: true
+    slug: "{{fields.title | slugify}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - { name: icon, label: Icon, widget: string, hint: "Single emoji or character" }
+      - { name: title, label: Title, widget: string }
+      - { name: body, label: Body, widget: text }
+      - { name: order, label: "Sort Order", widget: number, value_type: int }
+
+  - name: brand
+    label: "Brand Config"
+    files:
+      - name: config
+        label: "Brand Configuration"
+        file: src/config/brand.json
+        format: json
+        fields:
+          - name: agent
+            label: Agent
+            widget: object
+            fields:
+              - { name: name, label: Name, widget: string }
+              - { name: title, label: Title, widget: string }
+              - { name: dreNumber, label: "DRE Number", widget: string }
+          - name: contact
+            label: Contact
+            widget: object
+            fields:
+              - { name: phone, label: "Phone (display)", widget: string, hint: "e.g. +1 (415) 555-0100" }
+              - { name: phoneRaw, label: "Phone (raw)", widget: string, hint: "e.g. +1-415-555-0100" }
+              - { name: email, label: Email, widget: string }
+          - name: social
+            label: Social
+            widget: object
+            fields:
+              - { name: twitter, label: "Twitter Handle", widget: string }
+              - { name: twitterUrl, label: "Twitter URL", widget: string }
+              - { name: linkedinUrl, label: "LinkedIn URL", widget: string }
+          - name: location
+            label: Location
+            widget: object
+            fields:
+              - { name: city, label: City, widget: string }
+              - { name: region, label: "State/Region", widget: string }
+              - { name: country, label: Country, widget: string }
+              - { name: areaServed, label: "Area Served", widget: string }
+          - name: site
+            label: Site
+            widget: object
+            fields:
+              - { name: name, label: "Site Name", widget: string }
+              - { name: url, label: "Site URL", widget: string }
+              - { name: ogImage, label: "OG Image Path", widget: string }
+              - name: twitterCard
+                label: "Twitter Card Type"
+                widget: select
+                options: ["summary", "summary_large_image"]
+                default: summary_large_image
+          - name: theme
+            label: Theme
+            widget: object
+            fields:
+              - name: colors
+                label: Colors
+                widget: object
+                fields:
+                  - { name: primary, label: "Primary (dark bg)", widget: color }
+                  - { name: primaryLight, label: "Primary Light", widget: color }
+                  - { name: accent, label: "Accent", widget: color }
+                  - { name: accentHover, label: "Accent Hover", widget: color }
+                  - { name: background, label: "Background (light)", widget: color }
+                  - { name: backgroundAlt, label: "Background Alt", widget: color }
+              - name: fonts
+                label: Fonts
+                widget: object
+                fields:
+                  - { name: display, label: "Display Font", widget: string, hint: "Full CSS font-family value" }
+                  - { name: body, label: "Body Font", widget: string, hint: "Full CSS font-family value" }
