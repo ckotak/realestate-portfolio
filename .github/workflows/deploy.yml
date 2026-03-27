@@ -22,6 +22,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate theme tokens
+        run: npm run theme
+
       - name: Build and upload artifact
         uses: withastro/action@v5
 
