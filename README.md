@@ -27,38 +27,45 @@ The site includes a browser-based content manager powered by [Sveltia CMS](https
 
 The CMS requires a GitHub OAuth App and a Cloudflare Worker to handle authentication.
 
-#### 1. Register a GitHub OAuth App
+#### 1. Set Up Cloudflare Account
+
+The OAuth proxy runs as a Cloudflare Worker (free tier is sufficient).
+
+1. Create a [Cloudflare account](https://dash.cloudflare.com/sign-up) if you don't have one
+2. Install [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/install-and-update/): `npm install -g wrangler`
+3. Authenticate with your Cloudflare account: `wrangler login` (opens browser for approval)
+4. Do a first deploy to get your Worker URL:
+   ```bash
+   cd admin/worker
+   npx wrangler deploy
+   ```
+5. Note the deployed Worker URL printed by Wrangler (e.g., `https://sveltia-cms-auth.your-subdomain.workers.dev`) — you'll need this for steps 2 and 4
+
+#### 2. Register a GitHub OAuth App
 
 1. Go to [GitHub Developer Settings](https://github.com/settings/developers)
 2. Click **New OAuth App**
 3. Fill in:
    - **Application name:** `Sveltia CMS` (or any name)
    - **Homepage URL:** `https://chetankotak.github.io/realestate-portfolio/admin/`
-   - **Authorization callback URL:** `https://sveltia-cms-auth.<your-account>.workers.dev/callback`
+   - **Authorization callback URL:** `https://sveltia-cms-auth.your-subdomain.workers.dev/callback` (use your actual Worker URL from step 1)
 4. Click **Register application**
 5. Note the **Client ID** and generate a **Client Secret**
 
-#### 2. Deploy the Cloudflare Worker
+#### 3. Configure Worker Secrets and Redeploy
 
-The OAuth proxy worker lives in `admin/worker/`. It exchanges GitHub OAuth codes for access tokens.
+Set the GitHub OAuth credentials as Worker secrets, then redeploy:
 
-1. Install [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/install-and-update/): `npm install -g wrangler`
-2. Authenticate: `wrangler login`
-3. Set the OAuth secrets:
-   ```bash
-   cd admin/worker
-   npx wrangler secret put GITHUB_CLIENT_ID    # Paste the Client ID from step 1
-   npx wrangler secret put GITHUB_CLIENT_SECRET # Paste the Client Secret from step 1
-   ```
-4. Deploy the worker:
-   ```bash
-   npx wrangler deploy
-   ```
-5. Note the deployed worker URL (e.g., `https://sveltia-cms-auth.<account>.workers.dev`)
+```bash
+cd admin/worker
+npx wrangler secret put GITHUB_CLIENT_ID    # Paste the Client ID from step 2
+npx wrangler secret put GITHUB_CLIENT_SECRET # Paste the Client Secret from step 2
+npx wrangler deploy
+```
 
 Alternatively, add a `CLOUDFLARE_API_TOKEN` secret to the GitHub repo and use the **Deploy Auth Worker** workflow (Actions > Deploy Auth Worker > Run workflow).
 
-#### 3. Update CMS Config
+#### 4. Update CMS Config
 
 Edit `public/admin/config.yml` and replace the `base_url` placeholder:
 
@@ -67,10 +74,10 @@ backend:
   name: github
   repo: chetankotak/realestate-portfolio
   branch: main
-  base_url: https://sveltia-cms-auth.<your-account>.workers.dev  # <-- your actual Worker URL
+  base_url: https://sveltia-cms-auth.your-subdomain.workers.dev  # <-- your actual Worker URL from step 1
 ```
 
-#### 4. Add Collaborators
+#### 5. Add Collaborators
 
 Any user who needs CMS access must be added as a **collaborator** on the GitHub repo with write access.
 
