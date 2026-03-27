@@ -84,11 +84,11 @@ function corsHeaders() {
 function successPage(token) {
   return `<!doctype html><html><head><title>Auth</title></head><body><script>
 (function() {
-  window.opener.postMessage(
-    'authorization:github:success:${JSON.stringify({ token })}',
-    document.referrer
-  );
-  window.close();
+  const msg = 'authorization:github:success:${JSON.stringify({ token, provider: 'github' })}';
+  if (window.opener) {
+    window.opener.postMessage(msg, '*');
+    window.close();
+  }
 })();
 </script></body></html>`;
 }
