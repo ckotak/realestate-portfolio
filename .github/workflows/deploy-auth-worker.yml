@@ -1,0 +1,17 @@
+name: Deploy Auth Worker
+
+on: workflow_dispatch
+
+jobs:
+  deploy:
+    name: Deploy OAuth Worker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Deploy to Cloudflare Workers
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          workingDirectory: admin/worker
