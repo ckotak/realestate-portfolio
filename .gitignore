@@ -19,3 +19,4 @@ dist/
 .claude/agent-memory-local/
 .claude/projects/
 .superpowers/
+.worktrees/
