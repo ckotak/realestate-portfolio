@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: chetankotak/realestate-portfolio
+  repo: ckotak/realestate-portfolio
   branch: main
   base_url: https://sveltia-cms-auth.ckk-22.workers.dev
 
