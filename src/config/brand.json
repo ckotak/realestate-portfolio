@@ -28,12 +28,12 @@
   },
   "theme": {
     "colors": {
-      "primary": "#0a0f1e",
-      "primaryLight": "#111827",
-      "accent": "#b87333",
-      "accentHover": "#d4884a",
-      "background": "#faf9f7",
-      "backgroundAlt": "#f2ede8"
+      "primary": "#1a0a0a",
+      "primaryLight": "#2d0f0f",
+      "accent": "#aa0000",
+      "accentHover": "#c41a1a",
+      "background": "#fdf8f5",
+      "backgroundAlt": "#f5ede8"
     },
     "fonts": {
       "display": "'Bebas Neue', 'Arial Narrow', sans-serif",
